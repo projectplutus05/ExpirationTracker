@@ -4,6 +4,7 @@ using ExpirationTracker.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ExpirationTracker.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260523162456_AddTrailerDocuments")]
+    partial class AddTrailerDocuments
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -509,50 +512,6 @@ namespace ExpirationTracker.Migrations
                         });
                 });
 
-            modelBuilder.Entity("ExpirationTracker.Models.TruckDocument", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<byte[]>("Content")
-                        .IsRequired()
-                        .HasColumnType("varbinary(max)");
-
-                    b.Property<string>("ContentType")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("ExpirationType")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
-
-                    b.Property<string>("FileName")
-                        .IsRequired()
-                        .HasMaxLength(260)
-                        .HasColumnType("nvarchar(260)");
-
-                    b.Property<long>("FileSize")
-                        .HasColumnType("bigint");
-
-                    b.Property<int>("TruckId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("UploadedAtUtc")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("TruckId", "ExpirationType")
-                        .IsUnique();
-
-                    b.ToTable("TruckDocuments");
-                });
-
             modelBuilder.Entity("ExpirationTracker.Models.TruckMake", b =>
                 {
                     b.Property<int>("Id")
@@ -629,17 +588,6 @@ namespace ExpirationTracker.Migrations
                     b.Navigation("TruckMake");
                 });
 
-            modelBuilder.Entity("ExpirationTracker.Models.TruckDocument", b =>
-                {
-                    b.HasOne("ExpirationTracker.Models.Truck", "Truck")
-                        .WithMany("Documents")
-                        .HasForeignKey("TruckId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Truck");
-                });
-
             modelBuilder.Entity("ExpirationTracker.Models.Driver", b =>
                 {
                     b.Navigation("Documents");
@@ -648,11 +596,6 @@ namespace ExpirationTracker.Migrations
                 });
 
             modelBuilder.Entity("ExpirationTracker.Models.Trailer", b =>
-                {
-                    b.Navigation("Documents");
-                });
-
-            modelBuilder.Entity("ExpirationTracker.Models.Truck", b =>
                 {
                     b.Navigation("Documents");
                 });

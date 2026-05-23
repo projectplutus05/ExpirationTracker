@@ -46,4 +46,6 @@ public class Trailer
     [Display(Name = "Annual Inspection Expiry")]
     [DataType(DataType.Date)]
     public DateTime? AnnualInspExpiry { get; set; }
+
+    public ICollection<TrailerDocument> Documents { get; set; } = new List<TrailerDocument>();
 }

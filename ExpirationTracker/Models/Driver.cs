@@ -23,5 +23,7 @@ public class Driver
     [DataType(DataType.Date)]
     public DateTime? LicenseExpiry { get; set; }
 
+    public ICollection<DriverDocument> Documents { get; set; } = new List<DriverDocument>();
+
     public ICollection<Truck> Trucks { get; set; } = new List<Truck>();
 }

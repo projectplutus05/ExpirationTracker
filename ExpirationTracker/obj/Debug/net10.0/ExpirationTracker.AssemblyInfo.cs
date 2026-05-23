@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ExpirationTracker")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e28483d4b4e728d891a6f4324d5786075d619de1")]
 [assembly: System.Reflection.AssemblyProductAttribute("ExpirationTracker")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ExpirationTracker")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

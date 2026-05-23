@@ -45,4 +45,6 @@ public class Truck
     [Display(Name = "IRP Expiration")]
     [DataType(DataType.Date)]
     public DateTime? IrpExpiry { get; set; }
+
+    public ICollection<TruckDocument> Documents { get; set; } = new List<TruckDocument>();
 }

@@ -27,7 +27,8 @@
                         <th>VIN</th>
                         <th>Tag #</th>
                         <th>Tag Expiry</th>
-                        <th>Annual Inspection</th>
+                        <th>Annual</th>
+                        <th>Documents</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -53,6 +54,19 @@
                                 }
                             </td>
                             <td>@Html.DateBadge(item.AnnualInspExpiry)</td>
+                            <td>
+                                @foreach (var document in item.Documents.OrderBy(d => d.ExpirationType))
+                                {
+                                    var icon = document.ExpirationType == "Tag" ? "bi-tag" : "bi-clipboard-check";
+                                    <a asp-action="DownloadDocument"
+                                       asp-route-id="@document.Id"
+                                       class="document-icon-link me-1"
+                                       title="@document.ExpirationType document"
+                                       aria-label="Download @document.ExpirationType document">
+                                        <i class="bi @icon" aria-hidden="true"></i>
+                                    </a>
+                                }
+                            </td>
                             <td class="text-nowrap">
                                 <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-primary me-1">Edit</a>
                                 <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger">Delete</a>

@@ -7,7 +7,7 @@
 
 <div class="card shadow-sm data-entry-card" style="max-width:600px">
     <div class="card-body">
-        <form asp-action="Create">
+        <form asp-action="Create" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
             @await Html.PartialAsync("_TrailerForm", Model)
             <div class="d-flex gap-2 mt-3">

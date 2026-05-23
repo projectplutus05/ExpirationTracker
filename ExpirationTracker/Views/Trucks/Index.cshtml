@@ -28,6 +28,7 @@
                         <th>DOT</th>
                         <th>Tag</th>
                         <th>IRP</th>
+                        <th>Documents</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -44,6 +45,24 @@
                             <td>@Html.DateBadge(item.DotInspectionExpiry)</td>
                             <td>@Html.DateBadge(item.TruckTagExpiry)</td>
                             <td>@Html.DateBadge(item.IrpExpiry)</td>
+                            <td>
+                                @foreach (var document in item.Documents.OrderBy(d => d.ExpirationType))
+                                {
+                                    var icon = document.ExpirationType switch
+                                    {
+                                        "DOT" => "bi-clipboard2-check",
+                                        "Tag" => "bi-tag",
+                                        _ => "bi-file-earmark-text"
+                                    };
+                                    <a asp-action="DownloadDocument"
+                                       asp-route-id="@document.Id"
+                                       class="document-icon-link me-1"
+                                       title="@document.ExpirationType document"
+                                       aria-label="Download @document.ExpirationType document">
+                                        <i class="bi @icon" aria-hidden="true"></i>
+                                    </a>
+                                }
+                            </td>
                             <td class="text-nowrap">
                                 <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-primary me-1">Edit</a>
                                 <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger">Delete</a>

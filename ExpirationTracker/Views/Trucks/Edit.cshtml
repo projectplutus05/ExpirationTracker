@@ -7,7 +7,7 @@
 
 <div class="card shadow-sm data-entry-card" style="max-width:600px">
     <div class="card-body">
-        <form asp-action="Edit">
+        <form asp-action="Edit" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
             <input type="hidden" asp-for="Id" />
             @await Html.PartialAsync("_TruckForm", Model)
@@ -18,5 +18,29 @@
         </form>
     </div>
 </div>
+
+@if (Model.Documents.Any())
+{
+    <div class="card shadow-sm mt-3 data-entry-card" style="max-width:600px">
+        <div class="card-body">
+            <h5 class="card-title">Stored Documents</h5>
+            <div class="list-group list-group-flush">
+                @foreach (var document in Model.Documents.OrderBy(d => d.ExpirationType))
+                {
+                    <div class="list-group-item px-0 d-flex justify-content-between align-items-center gap-2">
+                        <div>
+                            <div class="fw-semibold">@document.ExpirationType</div>
+                            <a asp-action="DownloadDocument" asp-route-id="@document.Id">@document.FileName</a>
+                            <div class="small text-muted">@Math.Ceiling(document.FileSize / 1024d) KB</div>
+                        </div>
+                        <form asp-action="DeleteDocument" asp-route-id="@document.Id" method="post">
+                            <button type="submit" class="btn btn-sm btn-outline-danger">Remove</button>
+                        </form>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+}
 
 @section Scripts { @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); } }

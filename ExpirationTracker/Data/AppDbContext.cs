@@ -8,9 +8,12 @@ public class AppDbContext : DbContext
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
     public DbSet<Driver> Drivers { get; set; }
+    public DbSet<DriverDocument> DriverDocuments { get; set; }
     public DbSet<Truck> Trucks { get; set; }
+    public DbSet<TruckDocument> TruckDocuments { get; set; }
     public DbSet<TruckMake> TruckMakes { get; set; }
     public DbSet<Trailer> Trailers { get; set; }
+    public DbSet<TrailerDocument> TrailerDocuments { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -21,6 +24,36 @@ public class AppDbContext : DbContext
             .WithMany(d => d.Trucks)
             .HasForeignKey(t => t.DriverId)
             .OnDelete(DeleteBehavior.Restrict);
+
+        modelBuilder.Entity<DriverDocument>()
+            .HasOne(d => d.Driver)
+            .WithMany(d => d.Documents)
+            .HasForeignKey(d => d.DriverId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        modelBuilder.Entity<DriverDocument>()
+            .HasIndex(d => new { d.DriverId, d.ExpirationType })
+            .IsUnique();
+
+        modelBuilder.Entity<TrailerDocument>()
+            .HasOne(d => d.Trailer)
+            .WithMany(t => t.Documents)
+            .HasForeignKey(d => d.TrailerId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        modelBuilder.Entity<TrailerDocument>()
+            .HasIndex(d => new { d.TrailerId, d.ExpirationType })
+            .IsUnique();
+
+        modelBuilder.Entity<TruckDocument>()
+            .HasOne(d => d.Truck)
+            .WithMany(t => t.Documents)
+            .HasForeignKey(d => d.TruckId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        modelBuilder.Entity<TruckDocument>()
+            .HasIndex(d => new { d.TruckId, d.ExpirationType })
+            .IsUnique();
 
         modelBuilder.Entity<Truck>()
             .HasOne(t => t.TruckMake)

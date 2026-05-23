@@ -119,12 +119,101 @@ body {
   color: #68717d;
 }
 
+.data-entry-card .list-group {
+  --bs-list-group-bg: #ffffff;
+  --bs-list-group-color: #111820;
+  --bs-list-group-border-color: #d8dde5;
+}
+
+.data-entry-card .list-group-item {
+  background-color: #ffffff;
+  color: #111820;
+}
+
+.data-entry-card .text-muted {
+  color: #68717d !important;
+}
+
 .date-picker {
   cursor: pointer;
 }
 
 .date-picker::-webkit-calendar-picker-indicator {
   cursor: pointer;
+}
+
+.document-icon-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.8rem;
+  height: 1.8rem;
+  border: 1px solid #d8dde5;
+  border-radius: 6px;
+  background: #f8fafc;
+  color: #111820;
+  font-size: 1rem;
+  text-decoration: none;
+  vertical-align: middle;
+}
+
+.document-icon-link:hover,
+.document-icon-link:focus {
+  border-color: var(--app-primary-strong);
+  background: #eaf2ff;
+  color: #0b5ed7;
+}
+
+.file-drop-zone {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.1rem 0.65rem;
+  align-items: center;
+  width: 100%;
+  min-height: 4.25rem;
+  padding: 0.7rem 0.85rem;
+  border: 2px dashed #aab4c0;
+  border-radius: 8px;
+  background: #f8fafc;
+  color: #111820;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+}
+
+.file-drop-zone:hover,
+.file-drop-zone:focus-within,
+.file-drop-zone.is-drag-over {
+  border-color: var(--app-primary-strong);
+  background: #eaf2ff;
+}
+
+.file-drop-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  clip-path: inset(50%);
+}
+
+.file-drop-icon {
+  grid-row: 1 / span 2;
+  color: var(--app-primary-strong);
+  font-size: 1.6rem;
+  line-height: 1;
+}
+
+.file-drop-text {
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.file-drop-name {
+  color: #68717d;
+  font-size: 0.875rem;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
 }
 
 .data-entry-card .btn-outline-secondary {

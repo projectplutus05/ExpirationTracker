@@ -1,0 +1,34 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "watch: ExpirationTracker",
+            "type": "process",
+            "command": "dotnet",
+            "args": [
+                "watch",
+                "run",
+                "--launch-profile",
+                "http"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}\\ExpirationTracker"
+            },
+            "isBackground": true,
+            "problemMatcher": {
+                "owner": "msCompile",
+                "pattern": "$msCompile",
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": "dotnet watch",
+                    "endsPattern": "Now listening on:"
+                }
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated",
+                "clear": true
+            }
+        }
+    ]
+}
