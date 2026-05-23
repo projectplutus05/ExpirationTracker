@@ -1,0 +1,69 @@
+@model List<ExpirationTracker.Models.ExpirationItem>
+
+<div class="table-responsive">
+    <table class="table table-sm table-hover mb-0">
+        <thead class="table-light">
+            <tr>
+                <th>Type</th>
+                <th>Name</th>
+                <th>Number</th>
+                <th>Expiration</th>
+                <th>Expiry Date</th>
+                <th>Days</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                string rowClass = item.DaysUntilExpiry < 0 ? "table-danger"
+                    : item.DaysUntilExpiry <= 7 ? "table-warning"
+                    : "";
+                <tr class="@rowClass">
+                    <td>
+                        @if (item.Category == "Truck")
+                        {
+                            <span class="badge bg-primary">Truck</span>
+                        }
+                        else if (item.Category == "Driver")
+                        {
+                            <span class="badge bg-info text-dark">Driver</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-secondary">Trailer</span>
+                        }
+                    </td>
+                    <td>@item.Name</td>
+                    <td>@item.RecordNumber</td>
+                    <td>@item.ExpirationField</td>
+                    <td>@item.ExpiryDate.ToString("MM/dd/yyyy")</td>
+                    <td>
+                        @if (item.DaysUntilExpiry < 0)
+                        {
+                            <span class="text-danger fw-bold">@Math.Abs(item.DaysUntilExpiry) days ago</span>
+                        }
+                        else
+                        {
+                            <span>@item.DaysUntilExpiry days</span>
+                        }
+                    </td>
+                    <td>
+                        @if (item.Category == "Truck")
+                        {
+                            <a asp-controller="Trucks" asp-action="Edit" asp-route-id="@item.RecordId" class="btn btn-sm btn-outline-primary">Edit</a>
+                        }
+                        else if (item.Category == "Driver")
+                        {
+                            <a asp-controller="Drivers" asp-action="Edit" asp-route-id="@item.RecordId" class="btn btn-sm btn-outline-primary">Edit</a>
+                        }
+                        else
+                        {
+                            <a asp-controller="Trailers" asp-action="Edit" asp-route-id="@item.RecordId" class="btn btn-sm btn-outline-primary">Edit</a>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

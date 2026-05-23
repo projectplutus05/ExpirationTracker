@@ -1,0 +1,81 @@
+@model ExpirationTracker.Models.Trailer
+
+<div class="mb-3 row">
+    <label asp-for="AssignedTo" class="col-sm-4 col-form-label"></label>
+    <div class="col-sm-8">
+        <select asp-for="AssignedTo" class="form-select" asp-items="ViewBag.AssignedTo">
+            <option value="">Select Driver</option>
+        </select>
+        <span asp-validation-for="AssignedTo" class="text-danger"></span>
+    </div>
+</div>
+<div class="mb-3 row">
+    <label asp-for="TrailerNumber" class="col-sm-4 col-form-label"></label>
+    <div class="col-sm-8">
+        <input asp-for="TrailerNumber" class="form-control" />
+        <span asp-validation-for="TrailerNumber" class="text-danger"></span>
+    </div>
+</div>
+<div class="mb-3 row">
+    <label asp-for="HasHeadboard" class="col-sm-4 col-form-label"></label>
+    <div class="col-sm-8 d-flex align-items-center">
+        <input asp-for="HasHeadboard" class="form-check-input ms-0" type="checkbox" />
+        <span asp-validation-for="HasHeadboard" class="text-danger ms-2"></span>
+    </div>
+</div>
+<div class="mb-3 row">
+    <label asp-for="Year" class="col-sm-4 col-form-label"></label>
+    <div class="col-sm-8">
+        <input asp-for="Year" class="form-control" />
+        <span asp-validation-for="Year" class="text-danger"></span>
+    </div>
+</div>
+<div class="mb-3 row">
+    <label asp-for="Make" class="col-sm-4 col-form-label"></label>
+    <div class="col-sm-8">
+        <input asp-for="Make" class="form-control" />
+        <span asp-validation-for="Make" class="text-danger"></span>
+    </div>
+</div>
+<div class="mb-3 row">
+    <label asp-for="Model" class="col-sm-4 col-form-label"></label>
+    <div class="col-sm-8">
+        <input asp-for="Model" class="form-control" />
+        <span asp-validation-for="Model" class="text-danger"></span>
+    </div>
+</div>
+<div class="mb-3 row">
+    <label asp-for="Vin" class="col-sm-4 col-form-label"></label>
+    <div class="col-sm-8">
+        <input asp-for="Vin" class="form-control" />
+        <span asp-validation-for="Vin" class="text-danger"></span>
+    </div>
+</div>
+<div class="mb-3 row">
+    <label asp-for="TagNumber" class="col-sm-4 col-form-label"></label>
+    <div class="col-sm-8">
+        <input asp-for="TagNumber" class="form-control" />
+        <span asp-validation-for="TagNumber" class="text-danger"></span>
+    </div>
+</div>
+<div class="mb-3 row">
+    <label asp-for="TagExpiry" class="col-sm-4 col-form-label"></label>
+    <div class="col-sm-8">
+        <input asp-for="TagExpiry" asp-format="{0:yyyy-MM-dd}" class="form-control date-picker" type="date" onclick="if (this.showPicker) this.showPicker()" />
+        <span asp-validation-for="TagExpiry" class="text-danger"></span>
+    </div>
+</div>
+<div class="mb-3 row">
+    <label asp-for="TagNotes" class="col-sm-4 col-form-label"></label>
+    <div class="col-sm-8">
+        <input asp-for="TagNotes" class="form-control" placeholder="e.g. Perm" />
+        <span asp-validation-for="TagNotes" class="text-danger"></span>
+    </div>
+</div>
+<div class="mb-3 row">
+    <label asp-for="AnnualInspExpiry" class="col-sm-4 col-form-label"></label>
+    <div class="col-sm-8">
+        <input asp-for="AnnualInspExpiry" asp-format="{0:yyyy-MM-dd}" class="form-control date-picker" type="date" onclick="if (this.showPicker) this.showPicker()" />
+        <span asp-validation-for="AnnualInspExpiry" class="text-danger"></span>
+    </div>
+</div>

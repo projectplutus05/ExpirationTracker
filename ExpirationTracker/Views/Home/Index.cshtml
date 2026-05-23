@@ -1,0 +1,56 @@
+﻿@model ExpirationTracker.Models.DashboardViewModel
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2><i class="bi bi-speedometer2 me-2"></i>Expiration Dashboard</h2>
+    <form method="get" class="d-flex align-items-center gap-2">
+        <label class="fw-semibold mb-0">Show next</label>
+        <select name="days" class="form-select form-select-sm" style="width:80px" onchange="this.form.submit()">
+            @foreach (var d in new[] { 7, 14, 30, 60, 90 })
+            {
+                if (Model.DayThreshold == d)
+                {
+                    <option value="@d" selected>@d</option>
+                }
+                else
+                {
+                    <option value="@d">@d</option>
+                }
+            }
+        </select>
+        <label class="fw-semibold mb-0">days</label>
+    </form>
+</div>
+
+@if (Model.OverdueExpirations.Any())
+{
+    <div class="card border-danger mb-4 shadow-sm">
+        <div class="card-header bg-danger text-white fw-bold">
+            <i class="bi bi-exclamation-triangle-fill me-2"></i>Overdue (@Model.OverdueExpirations.Count)
+        </div>
+        <div class="card-body p-0">
+            @await Html.PartialAsync("_ExpirationTable", Model.OverdueExpirations)
+        </div>
+    </div>
+}
+
+@if (Model.UpcomingExpirations.Any())
+{
+    <div class="card border-warning mb-4 shadow-sm">
+        <div class="card-header bg-warning fw-bold">
+            <i class="bi bi-clock-history me-2"></i>Expiring within @Model.DayThreshold days (@Model.UpcomingExpirations.Count)
+        </div>
+        <div class="card-body p-0">
+            @await Html.PartialAsync("_ExpirationTable", Model.UpcomingExpirations)
+        </div>
+    </div>
+}
+
+@if (!Model.OverdueExpirations.Any() && !Model.UpcomingExpirations.Any())
+{
+    <div class="alert alert-success">
+        <i class="bi bi-check-circle-fill me-2"></i>No expirations overdue or within the next @Model.DayThreshold days.
+    </div>
+}
